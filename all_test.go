@@ -27,3 +27,12 @@ func TestToken_withJapanese(t *testing.T) {
 ＞ 日本語もいけます ＜
 ￣Y^Y^Y^Y^Y^Y^Y^Y^Y^￣`)
 }
+
+func TestToken_withMultiLines(t *testing.T) {
+	text := NewToken("test").Totsuzenize().Text
+	Expect(t, NewToken(text).Totsuzenize().Text).ToBe(`＿人人人人人人＿
+＞ ＿人人人＿ ＜
+＞ ＞ test ＜ ＜
+＞ ￣Y^Y^Y^￣ ＜
+￣Y^Y^Y^Y^Y^Y^￣`)
+}

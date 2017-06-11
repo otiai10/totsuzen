@@ -29,9 +29,10 @@ const (
 
 // NewToken ...
 func NewToken(raw string) *Token {
+	line := strings.Split(raw, "\n")[0]
 	return &Token{
 		Raw:        raw,
-		innerWidth: runewidth.StringWidth(" " + raw + " "),
+		innerWidth: runewidth.StringWidth(" " + line + " "),
 	}
 }
 
@@ -52,7 +53,11 @@ func (t *Token) Head() string {
 
 // Body creates body part of this token.
 func (t *Token) Body() string {
-	return "＞ " + t.Raw + " ＜"
+	lines := strings.Split(t.Raw, "\n")
+	for i, line := range lines {
+		lines[i] = "＞ " + line + " ＜"
+	}
+	return strings.Join(lines, "\n")
 }
 
 // Foot creates foot part of this token.
